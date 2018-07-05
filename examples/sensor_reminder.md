@@ -45,8 +45,3 @@ Enter the dates and you'll be able to see the dates in home assistant as well as
         can_acknowledge: True
         notifiers:
         - telegram_bot
-
---- 
-
-Currently using [this script](https://gist.github.com/benleb/8b969d3582c289da96207a0ef6fd24d1) from GitHub user 
-[benleb](https://gist.github.com/benleb) to fetch the local dates for AWS Stuttgart in the correct format.
