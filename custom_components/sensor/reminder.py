@@ -22,7 +22,7 @@ DATE_FORMAT = "%d.%m.%Y"
 # user config validation
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Required(NAME): cv.string,  # biogarbage
-    vol.Required(DATES): cv.string,  # ["01.01.2020","24.12.2020"]
+    vol.Required(DATES): vol.All(cv.ensure_list, [cv.string]),  # ["01.01.2020","24.12.2020"]
     vol.Optional(ICON, default='mdi:bell-ring'): cv.icon,
     vol.Optional(FORMAT, default=FORMAT_NORMAL): vol.In([FORMAT_NORMAL, FORMAT_DAYS])
 })
@@ -37,7 +37,6 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
 
     # try to parse dates
     try:
-        dates = literal_eval(dates)
         dates = [dt.datetime.strptime(date, DATE_FORMAT).date() for date in dates]
     except (ValueError, SyntaxError):
         _LOGGER.error(name + ": dates must be an array like ['01.01.2020', '24.12.2020']")
