@@ -5,7 +5,6 @@ from homeassistant.components.sensor import PLATFORM_SCHEMA
 from homeassistant.const import CONF_FRIENDLY_NAME
 import homeassistant.helpers.config_validation as cv
 import datetime as dt
-from ast import literal_eval
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -55,6 +54,7 @@ class ReminderSensor(Entity):
         self._format = format
         self._icon = icon
         self._state = None
+        self._attributes = {}
 
     @property
     def name(self):
@@ -73,6 +73,11 @@ class ReminderSensor(Entity):
             return self._icon
         return "mdi:checkbox-blank-circle-outline"
 
+    @property
+    def device_state_attributes(self):
+        """Return device specific state attributes."""
+        return self._attributes
+
     def update(self):
         """Fetch new state data for the sensor.
 
@@ -83,9 +88,14 @@ class ReminderSensor(Entity):
             next_date = min(date for date in self._dates if date >= today)
         except ValueError:
             self._state = ''
+            self._attributes = {}
             _LOGGER.warning(self._name + ': no upcoming date in dates')
         else:
             delta = (next_date - today).days
+
+            self._attributes["next_date"] = next_date.strftime(DATE_FORMAT)
+            self._attributes["delta"] = delta
+
             if delta == 0:
                 self._state = 'today'
             elif delta == 1:
