@@ -87,9 +87,11 @@ class ReminderSensor(Entity):
         try:
             next_date = min(date for date in self._dates if date >= today)
         except ValueError:
-            self._state = ''
+            if self._state != '-':
+                _LOGGER.warning(self._name + ': no upcoming date in dates')
+
+            self._state = '-'
             self._attributes = {}
-            _LOGGER.warning(self._name + ': no upcoming date in dates')
         else:
             delta = (next_date - today).days
 
