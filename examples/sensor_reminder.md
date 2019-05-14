@@ -6,7 +6,7 @@ Enter the dates and you'll be able to see the dates in home assistant as well as
 
 ### config
     sensor:
-      - platform: garbage
+      - platform: reminder
         friendly_name: "Gelber Sack"
         dates: ['01.01.2010', '24.12.2020']
         icon: mdi:recycle
