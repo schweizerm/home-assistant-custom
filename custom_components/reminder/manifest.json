@@ -1,0 +1,8 @@
+{
+  "domain": "reminder",
+  "name": "Reminder",
+  "documentation": "https://github.com/schweizerm/home-assistant-custom/blob/master/examples/sensor_reminder.md",
+  "dependencies": [],
+  "codeowners": ["@schweizerm"],
+  "requirements": []
+}
