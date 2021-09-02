@@ -4,5 +4,6 @@
   "documentation": "https://github.com/schweizerm/home-assistant-custom/blob/master/examples/sensor_reminder.md",
   "dependencies": [],
   "codeowners": ["@schweizerm"],
-  "requirements": []
+  "requirements": [],
+  "version": "1.0.0"
 }
